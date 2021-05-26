@@ -12,29 +12,41 @@ class _HomeState extends State<Home> {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     print(data);
     String? bgImage;
+    Color? bgColor;
     try {
       bgImage = data['isDaytime'] ? 'day.jpg' : 'night.jpg';
+      bgColor = data['isDaytime'] ? Colors.blue : Colors.indigo;
     } catch (e) {
-      bgImage = 'assets/day.jpg';
+      bgImage = 'day.jpg';
+      bgColor = Colors.red;
     }
     return Scaffold(
+      backgroundColor: bgColor,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage('assets/night.jpg'),
+            image: AssetImage('assets/$bgImage'),
             fit: BoxFit.cover,
           )),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),
             child: Column(
               children: [
-                ElevatedButton.icon(
+                TextButton.icon(
                   onPressed: () {
                     Navigator.pushNamed(context, '/location');
                   },
-                  icon: Icon(Icons.edit_location),
-                  label: Text('Edit Location'),
+                  icon: Icon(
+                    Icons.edit_location,
+                    color: Colors.grey,
+                  ),
+                  label: Text(
+                    'Edit Location',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20.0,
