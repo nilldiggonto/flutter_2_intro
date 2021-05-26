@@ -7,6 +7,7 @@ class WorldTime {
   String? time;
   String? flag;
   String? url;
+  bool? isDayTime;
 
   WorldTime(
       {this.time,
@@ -35,12 +36,13 @@ class WorldTime {
       now = now.add(Duration(hours: int.parse(offset)));
       // print(now);
       // time = now.toString();
+      isDayTime = now.hour > 6 && now.hour < 20 ? true : false;
       time = DateFormat.jm().format(now);
     } catch (e) {
       print('what error?: $e');
+      time = 'Server Error';
     }
     // print('$username- $bio');
-    time = 'Server Error';
   }
 }
 
